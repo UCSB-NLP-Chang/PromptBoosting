@@ -1,0 +1,22 @@
+{
+    "name": "manual_qnli",
+    "template":[
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment_1",
+            "content": "?"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment_2",
+            "content": ","
+        },
+        {
+            "meta": "text_b"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "name": "qnli_t5_sorted_template31",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": "?"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": ". For example,"
+        },
+        {
+            "meta": "text_b"
+        }
+    ]
+}

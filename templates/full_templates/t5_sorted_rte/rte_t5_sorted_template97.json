@@ -1,0 +1,22 @@
+{
+    "name": "rte_t5_sorted_template97",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": "."
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": ", this is not the first time that"
+        },
+        {
+            "meta": "text_b"
+        }
+    ]
+}

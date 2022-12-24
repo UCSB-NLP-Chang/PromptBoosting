@@ -1,0 +1,23 @@
+{
+    "name": "sst_t5_sorted_template77",
+    "template": [
+        {
+            "meta": "prompt_segment1",
+            "content": "A"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " piece of work."
+        },
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment3",
+            "content": ""
+        }
+    ]
+}

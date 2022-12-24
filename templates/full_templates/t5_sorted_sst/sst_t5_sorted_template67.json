@@ -1,0 +1,23 @@
+{
+    "name": "sst_t5_sorted_template67",
+    "template": [
+        {
+            "meta": "prompt_segment1",
+            "content": "Absolutely"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": "."
+        },
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment3",
+            "content": ""
+        }
+    ]
+}

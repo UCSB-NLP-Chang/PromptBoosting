@@ -1,0 +1,19 @@
+{
+    "name": "t5_sorted_template5",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " A truly"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " film."
+        }
+    ]
+}

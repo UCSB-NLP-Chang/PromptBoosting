@@ -1,0 +1,16 @@
+{
+    "name": "manual_agnews",
+    "template":[
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment_1",
+            "content": " News: "
+        },
+        {
+            "meta": "text_a"
+        }
+    ]
+
+}

@@ -1,0 +1,19 @@
+{
+    "name": "sst_t5_sorted_template28",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " The story is"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": "."
+        }
+    ]
+}

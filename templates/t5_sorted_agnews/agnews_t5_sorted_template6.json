@@ -1,0 +1,19 @@
+{
+    "name": "agnews_t5_sorted_template6",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " The"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " Journal has more."
+        }
+    ]
+}

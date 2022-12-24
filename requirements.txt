@@ -1,0 +1,5 @@
+transformers==4.20.1
+torch==1.10.0
+wandb==0.12.17
+sentencepiece==0.1.96
+datasets==2.1.0

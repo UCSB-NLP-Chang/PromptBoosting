@@ -1,0 +1,23 @@
+{
+    "name": "trec_t5_sorted_template94",
+    "template": [
+        {
+            "meta": "prompt_segment1",
+            "content": "All"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": "s."
+        },
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment3",
+            "content": ""
+        }
+    ]
+}

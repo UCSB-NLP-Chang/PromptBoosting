@@ -1,0 +1,19 @@
+{
+    "name": "mr_t5_sorted_template39",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " I found it"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": "."
+        }
+    ]
+}

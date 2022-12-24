@@ -1,0 +1,23 @@
+{
+    "name": "mr_t5_sorted_template80",
+    "template": [
+        {
+            "meta": "prompt_segment1",
+            "content": "A"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " read."
+        },
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment3",
+            "content": ""
+        }
+    ]
+}

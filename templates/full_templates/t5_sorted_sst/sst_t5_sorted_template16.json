@@ -1,0 +1,19 @@
+{
+    "name": "sst_t5_sorted_template16",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " The film is"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": "."
+        }
+    ]
+}

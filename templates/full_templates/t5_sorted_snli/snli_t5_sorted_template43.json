@@ -1,0 +1,22 @@
+{
+    "name": "snli_t5_sorted_template43",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": "."
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " that's"
+        },
+        {
+            "meta": "text_b"
+        }
+    ]
+}

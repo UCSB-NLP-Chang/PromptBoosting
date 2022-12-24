@@ -1,0 +1,19 @@
+{
+    "name": "sst_t5_sorted_template30",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " A"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " time was had."
+        }
+    ]
+}

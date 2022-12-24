@@ -1,0 +1,23 @@
+{
+    "name": "mr_t5_sorted_template96",
+    "template": [
+        {
+            "meta": "prompt_segment1",
+            "content": "That is"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": "."
+        },
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment3",
+            "content": ""
+        }
+    ]
+}

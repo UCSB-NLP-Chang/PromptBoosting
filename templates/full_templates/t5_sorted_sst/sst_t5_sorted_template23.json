@@ -1,0 +1,19 @@
+{
+    "name": "sst_t5_sorted_template23",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": " Thanks for the"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": " review."
+        }
+    ]
+}

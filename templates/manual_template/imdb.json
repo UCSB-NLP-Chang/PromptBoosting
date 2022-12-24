@@ -1,0 +1,20 @@
+{
+    "name": "manual_imdb",
+    "template":[
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment_1",
+            "content": " this movie was "
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment_2",
+            "content": "."
+        }
+    ]
+
+}

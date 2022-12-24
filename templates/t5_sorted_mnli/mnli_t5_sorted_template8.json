@@ -1,0 +1,26 @@
+{
+    "name": "mnli_t5_sorted_template8_v2",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": "."
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": ", and"
+        },
+        {
+            "meta": "text_b"
+        },
+        {
+            "meta": "prompt_segment3",
+            "content": ""
+        }
+    ]
+}

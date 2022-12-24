@@ -1,0 +1,22 @@
+{
+    "name": "qnli_t5_sorted_template73",
+    "template": [
+        {
+            "meta": "text_a"
+        },
+        {
+            "meta": "prompt_segment1",
+            "content": "?"
+        },
+        {
+            "meta": "output_token"
+        },
+        {
+            "meta": "prompt_segment2",
+            "content": ", it does not. However,"
+        },
+        {
+            "meta": "text_b"
+        }
+    ]
+}
