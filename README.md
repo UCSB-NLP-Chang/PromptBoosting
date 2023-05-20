@@ -1,5 +1,5 @@
 # PromptBoosting
-This is the official implementation of the paper *PromptBoosting: Black-Box Text Classification with Ten Forward Passes*.
+This is the official implementation of the ICML-2023 paper *PromptBoosting: Black-Box Text Classification with Ten Forward Passes*.
 
 ## Overview
 ![](./overview.png)
