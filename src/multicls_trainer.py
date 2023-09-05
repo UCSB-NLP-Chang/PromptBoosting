@@ -168,6 +168,7 @@ class PromptBoostingTrainer(BaseMuticlsTrainer):
                     weight_tensor: torch.FloatTensor, label_set_size: int, norm_class = False):
         label_map, token_scores = generate_multicls_l1_label_set_with_cache(dataset, vtuning_model, weight_list = weight_tensor.tolist(), cache_probs = train_probs, label_set_size = 0, 
                                 num_classes = self.num_classes, norm_class = norm_class)
+        
         for i in range(self.num_classes):
             class_mask = label_map == i
             token_scores[i,~class_mask] = -10000
@@ -210,6 +211,112 @@ class PromptBoostingTrainer(BaseMuticlsTrainer):
         for epoch in range(candidate_size):
             rand_verbalizer = verbalizer_pairs[selected_ids[epoch]]
             selected = [word2idx[rand_verbalizer[i]] for i in range(self.num_classes)]
+            verbalizer = {i:rand_verbalizer[i] for i in range(self.num_classes)}
+            wrong_flags, error, acc, pred_labels, train_logits = self.inference(train_probs, selected, train_labels, weight_tensor)
+
+            if error < best_error:
+                best_error = error
+                best_acc = acc
+                best_verbalizer = copy.deepcopy(verbalizer)
+                best_selected = copy.deepcopy(selected)
+                best_pred_labels = copy.deepcopy(pred_labels)
+                best_wrong_flags = copy.deepcopy(wrong_flags)
+            else:
+                del train_logits
+            if error > worst_error:
+                worst_error = error
+        print(f"error range: {best_error}-{worst_error}")
+        return best_verbalizer, best_error,best_acc, best_wrong_flags,best_pred_labels
+
+    def inference(self, eval_probs, verbalizer, eval_labels, weight_tensor):
+        acc, pred_labels, logits = self.compute_acc(eval_probs, verbalizer, eval_labels, visualize = False)
+        wrong_flags = (pred_labels != eval_labels).float()
+        error = torch.sum(wrong_flags * weight_tensor).item()
+        return wrong_flags, error, acc, pred_labels, logits
+
+    def compute_acc(self, eval_probs, verbalizer: List[int], eval_labels, visualize = False):
+        verbalizer_idxs = torch.LongTensor(verbalizer)
+        logits = eval_probs[:, verbalizer_idxs]
+        pred_labels = torch.argmax(logits, dim = 1).int()
+        corr = (pred_labels == eval_labels).sum()
+        acc = (corr / pred_labels.size(0)).item()
+        if visualize:
+            print(f"\ttotal {pred_labels.size(0)}, correct {corr}, accuracy {acc}")
+        return acc, pred_labels, logits
+
+    def evaluate(self, word2idx, eval_probs, verbalizer: Dict, eval_labels, visualize = True, analyze_pred = False):
+        verbalizer_list = [word2idx[verbalizer[i]] for i in range(self.num_classes) ]
+        acc, pred_labels, logits = self.compute_acc(eval_probs, verbalizer_list, eval_labels, visualize)
+        if analyze_pred:
+            self.analyze_acc_by_class(eval_labels, pred_labels)
+
+        return acc, pred_labels, logits
+
+class PromptBoostingMLTrainer(BaseMuticlsTrainer):
+    def __init__(self, adaboost_lr = 1.0, num_classes = 3, adaboost_maximum_epoch = 20000, use_logits = False):
+        super().__init__(adaboost_lr, num_classes, use_logits)
+        self.adaboost_maximum_epoch = adaboost_maximum_epoch
+
+    def train(self, dataset: List, vtuning_model: RoBERTaVTuningClassification,
+                    train_probs: torch.LongTensor, train_labels: torch.LongTensor, 
+                    weight_tensor: torch.FloatTensor, label_set_size: int, norm_class = False):
+        label_map, token_scores = generate_multicls_l1_label_set_with_cache(dataset, vtuning_model, weight_list = weight_tensor.tolist(), cache_probs = train_probs, label_set_size = 0, 
+                                num_classes = self.num_classes, norm_class = norm_class)
+        
+        print("TESTING")
+        print(train_probs.shape)
+        exit()
+
+        for i in range(self.num_classes):
+            class_mask = label_map == i
+            token_scores[i,~class_mask] = -10000
+
+        indices = torch.argsort(token_scores, dim = 1, descending = True)   ## num_classes, vocab_size
+        class_token_indices = indices[:, :label_set_size]
+                
+        label_token_index_list = []
+        label_token_list = []
+        for i in range(self.num_classes):
+            curr_token_index_list = class_token_indices[i].tolist()
+            label_token_index_list.append(curr_token_index_list)
+            label_tokens = vtuning_model.tokenizer.convert_ids_to_tokens(curr_token_index_list)
+            label_token_list.append(label_tokens)
+
+        print(class_token_indices)
+        print(label_token_list)
+        exit()
+
+        verbalizer_pairs = list(itertools.product(*label_token_list))
+        if self.num_classes == 2:  ## extend verbalizer
+            extended_verbalizer_pairs = []
+            extended_verbalizer_pairs += verbalizer_pairs
+            for v_pair in verbalizer_pairs:
+                reverse_pair = [v_pair[1],v_pair[0]]
+                extended_verbalizer_pairs.append(reverse_pair)
+            verbalizer_pairs = extended_verbalizer_pairs
+
+        print(len(verbalizer_pairs))
+        if self.adaboost_maximum_epoch > len(verbalizer_pairs):
+            print(f"change maxmium epochs from {self.adaboost_maximum_epoch} to {len(verbalizer_pairs)}")
+            candidate_size = len(verbalizer_pairs)
+        else:
+            candidate_size = self.adaboost_maximum_epoch
+        selected_ids = np.random.choice(len(verbalizer_pairs), candidate_size, replace = False)
+        
+        best_error = 1
+        worst_error = 0
+        best_acc = 0
+        best_verbalizer = None
+        best_pred_labels = None
+        best_wrong_flags = None
+
+        word2idx = vtuning_model.tokenizer.get_vocab()
+        for epoch in range(candidate_size):
+            rand_verbalizer = verbalizer_pairs[selected_ids[epoch]]
+            selected = [word2idx[rand_verbalizer[i]] for i in range(self.num_classes)]
+            print(selected_ids)
+            print(selected)
+            exit()
             verbalizer = {i:rand_verbalizer[i] for i in range(self.num_classes)}
             wrong_flags, error, acc, pred_labels, train_logits = self.inference(train_probs, selected, train_labels, weight_tensor)
 

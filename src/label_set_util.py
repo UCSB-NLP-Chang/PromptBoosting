@@ -33,9 +33,13 @@ def generate_multicls_l1_label_set_with_cache(train_dataset, vtuning_model: RoBE
         label_multiplier[label_mask] = 1.0
         label_multiplier = label_multiplier.view(-1,1)
         balanced_score_tensor = cache_probs * label_multiplier
+        print(balanced_score_tensor.shape)
         balanced_score_tensor = balanced_score_tensor * batch_weights
         label_indicator[i,:] = torch.sum(balanced_score_tensor, dim = 0)          
 
     root = torch.argmax(label_indicator, dim = 0)
+    print(root)
+    print(label_indicator.shape)
+    exit()
     return root, label_indicator
 

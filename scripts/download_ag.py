@@ -10,7 +10,7 @@ ag_dataset = datasets.load_dataset("ag_news", cache_dir = os.path.join(ROOT_DIR,
 train_dataset = ag_dataset['train']
 test_dataset = ag_dataset['test']
 
-output_dir = ROOT_DIR + 'datasets/original/agnews/'
+output_dir = '/local/scratch/david/text_datasets/agnews/'
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
 pd_train = train_dataset.to_pandas()
